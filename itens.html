@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens encontrados | Achados e Perdidos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar md:navbar-expand bg-1">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Achados e Perdidos</a>
+
+                <button id="btn-tema" class="btn-outline theme-secondary ms-auto me-2">Modo escuro</button>
+
+                <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer"
+                    data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false"
+                    aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <dialog id="menu-principal" class="drawer drawer-end">
+                    <div class="drawer-header">
+                        <h2 class="drawer-title">Menu</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Fechar"></button>
+                    </div>
+                    <div class="drawer-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="itens.html">Itens encontrados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="perdi-algo.html">Solicitações</a></li>
+                            <li class="nav-item"><a class="nav-link" href="correspondencias.html">Correspondências</a></li>
+                            <li class="nav-item"><a class="nav-link" href="locais.html">Locais</a></li>
+                        </ul>
+                    </div>
+                </dialog>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5">
+
+        <div id="alertas">
+            <!-- exemplos:
+            <div class="alert theme-success" role="alert">
+                <p>Item cadastrado com sucesso.</p>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+            <div class="alert theme-danger" role="alert">
+                <p>Não foi possível salvar o item.</p>
+                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+            -->
+        </div>
+
+        <h1 class="mb-5">Itens encontrados</h1>
+
+        <div class="row g-5">
+
+            <section class="col-12 lg:col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="mb-4">Cadastrar item</h2>
+
+                        <form id="form-item" class="d-flex flex-column gap-4" novalidate>
+                            <div class="form-field">
+                                <label for="item-descricao" class="form-label">Descrição</label>
+                                <input type="text" id="item-descricao" class="form-control" placeholder="Ex.: Fone de ouvido preto">
+                                <div id="erro-item-descricao" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="item-categoria" class="form-label">Categoria</label>
+                                <select id="item-categoria" class="form-control">
+                                    <option value="">Selecione</option>
+                                    <option value="documentos">Documentos</option>
+                                    <option value="eletronicos">Eletrônicos</option>
+                                    <option value="chaves">Chaves</option>
+                                    <option value="garrafas">Garrafas</option>
+                                    <option value="roupas">Roupas</option>
+                                    <option value="material-escolar">Material escolar</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                                <div id="erro-item-categoria" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="item-cor" class="form-label">Cor</label>
+                                <input type="text" id="item-cor" class="form-control" placeholder="Ex.: Preto">
+                                <div id="erro-item-cor" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="item-local" class="form-label">Local onde foi encontrado</label>
+                                <select id="item-local" class="form-control">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <div id="erro-item-local" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="item-data" class="form-label">Data em que foi encontrado</label>
+                                <input type="date" id="item-data" class="form-control">
+                                <div id="erro-item-data" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="acoes d-flex flex-wrap gap-3">
+                                <button type="submit" id="btn-salvar-item" class="btn-solid theme-primary">Cadastrar</button>
+                                <button type="button" id="btn-cancelar-item" class="btn-outline theme-secondary" hidden>Cancelar edição</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="col-12 lg:col-8">
+                <h2 class="mb-4">Itens cadastrados</h2>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 md:col-6">
+                        <label for="busca-itens" class="form-label">Buscar</label>
+                        <input type="search" id="busca-itens" class="form-control" placeholder="Descrição ou cor">
+                    </div>
+                    <div class="col-12 md:col-6">
+                        <label for="filtro-categoria" class="form-label">Categoria</label>
+                        <select id="filtro-categoria" class="form-control">
+                            <option value="">Todas</option>
+                            <option value="documentos">Documentos</option>
+                            <option value="eletronicos">Eletrônicos</option>
+                            <option value="chaves">Chaves</option>
+                            <option value="garrafas">Garrafas</option>
+                            <option value="roupas">Roupas</option>
+                            <option value="material-escolar">Material escolar</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="col-12 md:col-6">
+                        <label for="filtro-local" class="form-label">Local</label>
+                        <select id="filtro-local" class="form-control">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="col-12 md:col-6">
+                        <label for="ordenar-itens" class="form-label">Ordenar por</label>
+                        <select id="ordenar-itens" class="form-control">
+                            <option value="recentes">Mais recentes</option>
+                            <option value="antigos">Mais antigos</option>
+                            <option value="a-z">A–Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <ul id="abas-status" class="nav nav-pills mb-4">
+                    <li class="nav-item"><button class="nav-link active" data-status="aguardando">Aguardando</button></li>
+                    <li class="nav-item"><button class="nav-link" data-status="reclamado">Reclamados</button></li>
+                    <li class="nav-item"><button class="nav-link" data-status="devolvido">Devolvidos</button></li>
+                    <li class="nav-item"><button class="nav-link" data-status="doado">Doados</button></li>
+                </ul>
+
+                <div id="lista-itens" class="row row-cols-1 md:row-cols-2 g-4">
+                    <!-- exemplo de item aguardando (o botão Doar só aparece depois de 60 dias):
+                    <div class="col">
+                        <article class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge theme-secondary">Eletrônicos</span>
+                                    <span class="badge status-aguardando">Aguardando dono</span>
+                                </div>
+                                <h3 class="card-title">Fone de ouvido preto</h3>
+                                <p class="card-text">Local: Biblioteca</p>
+                                <p class="card-text">há 12 dias</p>
+                                <div class="acoes d-flex flex-wrap gap-2 mt-3">
+                                    <button class="botao-editar btn-outline theme-primary">Editar</button>
+                                    <button class="botao-excluir btn-outline theme-danger">Excluir</button>
+                                    <button class="botao-doar btn-outline theme-secondary" hidden>Doar</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    -->
+                    <!-- exemplo de item reclamado:
+                    <div class="col">
+                        <article class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge theme-secondary">Documentos</span>
+                                    <span class="badge status-reclamado">Reclamado</span>
+                                </div>
+                                <h3 class="card-title">Carteira marrom</h3>
+                                <p class="card-text">Local: Cantina</p>
+                                <p class="card-text">há 3 dias</p>
+                                <div class="acoes d-flex flex-wrap gap-2 mt-3">
+                                    <button class="botao-confirmar-devolucao btn-solid theme-success">Confirmar devolução</button>
+                                    <button class="botao-editar btn-outline theme-primary">Editar</button>
+                                    <button class="botao-excluir btn-outline theme-danger">Excluir</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    -->
+                </div>
+
+                <p id="mensagem-vazia-itens" class="mt-4" hidden>Nenhum item encontrado.</p>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="rodape py-5">
+        <div class="container">
+            <p>Achados e Perdidos • Desenvolvimento Web I</p>
+        </div>
+    </footer>
+
+    <div id="modal-excluir" class="modal-excluir" hidden>
+        <div class="modal-excluir-fundo"></div>
+        <div class="modal-excluir-caixa">
+            <h2>Confirmar exclusão</h2>
+            <p id="modal-excluir-texto">Tem certeza que deseja excluir este registro?</p>
+            <div class="acoes d-flex flex-wrap gap-3">
+                <button id="btn-confirmar-exclusao" class="btn-solid theme-danger">Excluir</button>
+                <button id="btn-cancelar-exclusao" class="btn-outline theme-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+        crossorigin="anonymous"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/itens.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

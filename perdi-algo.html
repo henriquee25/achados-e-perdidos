@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitações | Achados e Perdidos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar lg:navbar-expand bg-1">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Achados e Perdidos</a>
+
+                <button id="btn-tema" class="btn-outline theme-secondary ms-auto me-2">Modo escuro</button>
+
+                <button class="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer"
+                    data-bs-target="#menu-principal" aria-controls="menu-principal" aria-expanded="false"
+                    aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <dialog id="menu-principal" class="drawer drawer-end">
+                    <div class="drawer-header">
+                        <h2 class="drawer-title">Menu</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Fechar"></button>
+                    </div>
+                    <div class="drawer-body">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                            <li class="nav-item"><a class="nav-link" href="itens.html">Itens encontrados</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="perdi-algo.html">Solicitações</a></li>
+                            <li class="nav-item"><a class="nav-link" href="correspondencias.html">Correspondências</a></li>
+                            <li class="nav-item"><a class="nav-link" href="locais.html">Locais</a></li>
+                        </ul>
+                    </div>
+                </dialog>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container my-5">
+
+        <div id="alertas"></div>
+
+        <h1 class="mb-5">Solicitações</h1>
+
+        <div class="row g-5">
+
+            <section class="col-12 lg:col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="mb-4">Registrar perda</h2>
+
+                        <form id="form-solicitacao" class="d-flex flex-column gap-4">
+                            <div class="form-field">
+                                <label for="sol-nome" class="form-label">Nome</label>
+                                <input type="text" id="sol-nome" class="form-control" placeholder="Ex.: Maria Souza">
+                                <div id="erro-sol-nome" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-contato" class="form-label">Contato (e-mail ou celular)</label>
+                                <input type="text" id="sol-contato" class="form-control" placeholder="Ex.: maria@email.com">
+                                <div id="erro-sol-contato" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-curso" class="form-label">Curso</label>
+                                <select id="sol-curso" class="form-control">
+                                    <option value="">Selecione</option>
+                                    <option value="engenharia-de-software">Engenharia de Software</option>
+                                    <option value="sistemas-de-informacao">Sistemas de Informação</option>
+                                    <option value="administracao">Administração</option>
+                                    <option value="direito">Direito</option>
+                                    <option value="enfermagem">Enfermagem</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                                <div id="erro-sol-curso" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-fase" class="form-label">Fase</label>
+                                <select id="sol-fase" class="form-control">
+                                    <option value="">Selecione</option>
+                                    <option value="1">1ª</option>
+                                    <option value="2">2ª</option>
+                                    <option value="3">3ª</option>
+                                    <option value="4">4ª</option>
+                                    <option value="5">5ª</option>
+                                    <option value="6">6ª</option>
+                                    <option value="7">7ª</option>
+                                    <option value="8">8ª</option>
+                                    <option value="9">9ª</option>
+                                    <option value="10">10ª</option>
+                                </select>
+                                <div id="erro-sol-fase" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-categoria" class="form-label">Categoria do objeto</label>
+                                <select id="sol-categoria" class="form-control">
+                                    <option value="">Selecione</option>
+                                    <option value="documentos">Documentos</option>
+                                    <option value="eletronicos">Eletrônicos</option>
+                                    <option value="chaves">Chaves</option>
+                                    <option value="garrafas">Garrafas</option>
+                                    <option value="roupas">Roupas</option>
+                                    <option value="material-escolar">Material escolar</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                                <div id="erro-sol-categoria" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-cor" class="form-label">Cor</label>
+                                <input type="text" id="sol-cor" class="form-control" placeholder="Ex.: Azul">
+                                <div id="erro-sol-cor" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-local" class="form-label">Onde acha que perdeu</label>
+                                <select id="sol-local" class="form-control">
+                                    <option value="">Selecione</option>
+                                </select>
+                                <div id="erro-sol-local" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="sol-data" class="form-label">Data da perda</label>
+                                <input type="date" id="sol-data" class="form-control">
+                                <div id="erro-sol-data" class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="acoes d-flex flex-wrap gap-3">
+                                <button type="submit" id="btn-salvar-solicitacao" class="btn-solid theme-primary">Cadastrar</button>
+                                <button type="button" id="btn-cancelar-solicitacao" class="btn-outline theme-secondary" hidden>Cancelar edição</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="col-12 lg:col-8">
+                <h2 class="mb-4">Solicitações registradas</h2>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Curso/Fase</th>
+                                <th>Procura</th>
+                                <th>Local</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-solicitacoes"></tbody>
+                    </table>
+                </div>
+
+                <p id="mensagem-vazia-solicitacoes" class="mt-4">Nenhuma solicitação registrada.</p>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="rodape py-5">
+        <div class="container">
+            <p>Achados e Perdidos • Desenvolvimento Web I</p>
+        </div>
+    </footer>
+
+    <div id="modal-excluir" class="modal-excluir" hidden>
+        <div class="modal-excluir-fundo"></div>
+        <div class="modal-excluir-caixa">
+            <h2>Confirmar exclusão</h2>
+            <p id="modal-excluir-texto">Tem certeza que deseja excluir este registro?</p>
+            <div class="acoes d-flex flex-wrap gap-3">
+                <button id="btn-confirmar-exclusao" class="btn-solid theme-danger">Excluir</button>
+                <button id="btn-cancelar-exclusao" class="btn-outline theme-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+        crossorigin="anonymous"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/solicitacoes.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -13,7 +13,7 @@
 <body>
 
     <header>
-        <nav class="navbar md:navbar-expand bg-1">
+        <nav class="navbar lg:navbar-expand bg-1">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Achados e Perdidos</a>
 
@@ -46,18 +46,7 @@
 
     <main class="container my-5">
 
-        <div id="alertas">
-            <!-- exemplos:
-            <div class="alert theme-success" role="alert">
-                <p>Item cadastrado com sucesso.</p>
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
-            </div>
-            <div class="alert theme-danger" role="alert">
-                <p>Não foi possível salvar o item.</p>
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
-            </div>
-            -->
-        </div>
+        <div id="alertas"></div>
 
         <h1 class="mb-5">Itens encontrados</h1>
 
@@ -68,7 +57,7 @@
                     <div class="card-body">
                         <h2 class="mb-4">Cadastrar item</h2>
 
-                        <form id="form-item" class="d-flex flex-column gap-4" novalidate>
+                        <form id="form-item" class="d-flex flex-column gap-4">
                             <div class="form-field">
                                 <label for="item-descricao" class="form-label">Descrição</label>
                                 <input type="text" id="item-descricao" class="form-control" placeholder="Ex.: Fone de ouvido preto">
@@ -163,48 +152,7 @@
                     <li class="nav-item"><button class="nav-link" data-status="doado">Doados</button></li>
                 </ul>
 
-                <div id="lista-itens" class="row row-cols-1 md:row-cols-2 g-4">
-                    <!-- exemplo de item aguardando (o botão Doar só aparece depois de 60 dias):
-                    <div class="col">
-                        <article class="card h-100">
-                            <div class="card-body">
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge theme-secondary">Eletrônicos</span>
-                                    <span class="badge status-aguardando">Aguardando dono</span>
-                                </div>
-                                <h3 class="card-title">Fone de ouvido preto</h3>
-                                <p class="card-text">Local: Biblioteca</p>
-                                <p class="card-text">há 12 dias</p>
-                                <div class="acoes d-flex flex-wrap gap-2 mt-3">
-                                    <button class="botao-editar btn-outline theme-primary">Editar</button>
-                                    <button class="botao-excluir btn-outline theme-danger">Excluir</button>
-                                    <button class="botao-doar btn-outline theme-secondary" hidden>Doar</button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    -->
-                    <!-- exemplo de item reclamado:
-                    <div class="col">
-                        <article class="card h-100">
-                            <div class="card-body">
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                                    <span class="badge theme-secondary">Documentos</span>
-                                    <span class="badge status-reclamado">Reclamado</span>
-                                </div>
-                                <h3 class="card-title">Carteira marrom</h3>
-                                <p class="card-text">Local: Cantina</p>
-                                <p class="card-text">há 3 dias</p>
-                                <div class="acoes d-flex flex-wrap gap-2 mt-3">
-                                    <button class="botao-confirmar-devolucao btn-solid theme-success">Confirmar devolução</button>
-                                    <button class="botao-editar btn-outline theme-primary">Editar</button>
-                                    <button class="botao-excluir btn-outline theme-danger">Excluir</button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    -->
-                </div>
+                <div id="lista-itens" class="row row-cols-1 md:row-cols-2 g-4"></div>
 
                 <p id="mensagem-vazia-itens" class="mt-4" hidden>Nenhum item encontrado.</p>
             </section>

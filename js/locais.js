@@ -24,6 +24,19 @@ function contarSolicitacoes(nomeLocal) {
     return total;
 }
 
+function contarItens(nomeLocal) {
+    const itensSalvos = carregarLista("ap_itens");
+    let total = 0;
+
+    itensSalvos.forEach(function (item) {
+        if (item.local === nomeLocal) {
+            total++;
+        }
+    });
+
+    return total;
+}
+
 function listarLocais() {
     listaLocais.innerHTML = "";
     mensagemVazia.hidden = locais.length > 0;
@@ -38,7 +51,7 @@ function listarLocais() {
         colunaBloco.textContent = local.bloco;
 
         const colunaItens = document.createElement("td");
-        colunaItens.textContent = contarSolicitacoes(local.nome);
+        colunaItens.textContent = contarItens(local.nome);
 
         const colunaAcoes = document.createElement("td");
 
@@ -148,6 +161,12 @@ function editarLocal(indice) {
 
 //delete
 function excluirLocal(indice) {
+    //nao exclui local que tem itens ou solicitacoes ligados a ele
+    if (contarItens(locais[indice].nome) > 0 || contarSolicitacoes(locais[indice].nome) > 0) {
+        alert("Este local tem itens ou solicitações cadastrados e não pode ser excluído.");
+        return;
+    }
+
     const confirmou = confirm("Deseja excluir este local?");
 
     if (confirmou) {

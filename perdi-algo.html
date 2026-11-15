@@ -26,7 +26,8 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
                         <li class="nav-item"><a class="nav-link" href="itens.html">Itens encontrados</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="perdi-algo.html">Solicitações</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page"
+                                href="perdi-algo.html">Solicitações</a></li>
                         <li class="nav-item"><a class="nav-link" href="correspondencias.html">Correspondências</a></li>
                         <li class="nav-item"><a class="nav-link" href="locais.html">Locais</a></li>
                     </ul>
@@ -59,13 +60,15 @@
 
                             <div class="mb-3">
                                 <label for="sol-contato" class="form-label">Contato (e-mail ou celular)</label>
-                                <input type="text" id="sol-contato" class="form-control" placeholder="Ex.: maria@email.com">
+                                <input type="text" id="sol-contato" class="form-control"
+                                    placeholder="Ex.: maria@email.com">
                                 <div id="erro-sol-contato" class="invalid-feedback"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="sol-curso" class="form-label">Curso</label>
-                                <input type="text" id="sol-curso" class="form-control" placeholder="Ex.: Engenharia de Software">
+                                <input type="text" id="sol-curso" class="form-control"
+                                    placeholder="Ex.: Engenharia de Software">
                                 <div id="erro-sol-curso" class="invalid-feedback"></div>
                             </div>
 
@@ -89,7 +92,8 @@
 
                             <div class="mb-3">
                                 <label for="sol-categoria" class="form-label">Categoria do objeto</label>
-                                <input type="text" id="sol-categoria" class="form-control" placeholder="Ex.: Documentos">
+                                <input type="text" id="sol-categoria" class="form-control"
+                                    placeholder="Ex.: Documentos">
                                 <div id="erro-sol-categoria" class="invalid-feedback"></div>
                             </div>
 
@@ -101,8 +105,9 @@
 
                             <div class="mb-3">
                                 <label for="sol-local" class="form-label">Onde acha que perdeu</label>
-                                <input type="text" id="sol-local" class="form-control" placeholder="Ex.: Biblioteca">
-                                <div id="erro-sol-local" class="invalid-feedback"></div>
+                                <select id="sol-local" class="form-select">
+                                    <option value="">Selecione</option>
+                                </select>
                             </div>
 
                             <div class="mb-3">
@@ -112,8 +117,10 @@
                             </div>
 
                             <div class="acoes d-flex flex-wrap gap-2">
-                                <button type="submit" id="btn-salvar-solicitacao" class="btn btn-primary">Cadastrar</button>
-                                <button type="button" id="btn-cancelar-solicitacao" class="btn btn-outline-secondary" hidden>Cancelar edição</button>
+                                <button type="submit" id="btn-salvar-solicitacao"
+                                    class="btn btn-primary">Cadastrar</button>
+                                <button type="button" id="btn-cancelar-solicitacao" class="btn btn-outline-secondary"
+                                    hidden>Cancelar edição</button>
                             </div>
                         </form>
                     </div>

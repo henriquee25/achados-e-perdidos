@@ -98,7 +98,7 @@
                 <div class="row g-3 mb-3">
                     <div class="col-12 col-md-6">
                         <label for="busca-itens" class="form-label">Buscar</label>
-                        <input type="search" id="busca-itens" class="form-control" placeholder="Descrição ou cor">
+                        <input type="search" id="busca-itens" class="form-control" placeholder="Descrição ou cor completa">
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="filtro-categoria" class="form-label">Categoria</label>
@@ -117,8 +117,10 @@
                         <select id="ordenar-itens" class="form-select">
                             <option value="recentes">Mais recentes</option>
                             <option value="antigos">Mais antigos</option>
-                            <option value="a-z">A–Z</option>
                         </select>
+                    </div>
+                    <div class="col-12">
+                        <button id="btn-filtrar" class="btn btn-outline-primary">Filtrar</button>
                     </div>
                 </div>
 

@@ -8,18 +8,29 @@ const mensagemVazia = document.querySelector("#mensagem-vazia-locais");
 const erroNome = document.querySelector("#erro-local-nome");
 const erroBloco = document.querySelector("#erro-local-bloco");
 
-
 let locais = carregarLista("ap_locais");
-
 let indiceEdicao = null;
 
+function contarSolicitacoes(nomeLocal) {
+    const solicitacoesSalvas = carregarLista("ap_solicitacoes");
+    let total = 0;
+
+    solicitacoesSalvas.forEach(function (solicitacao) {
+        if (solicitacao.local === nomeLocal) {
+            total++;
+        }
+    });
+
+    return total;
+}
+
 function listarLocais() {
-    listaLocais.innerHTML = ""
-    mensagemVazia.hidden = locais.length > 0
+    listaLocais.innerHTML = "";
+    mensagemVazia.hidden = locais.length > 0;
 
     locais.forEach(function (local, indice) {
         const linha = document.createElement("tr");
-        
+
         const colunaNome = document.createElement("td");
         colunaNome.textContent = local.nome;
 
@@ -27,11 +38,11 @@ function listarLocais() {
         colunaBloco.textContent = local.bloco;
 
         const colunaItens = document.createElement("td");
-        colunaItens.textContent = 0;
+        colunaItens.textContent = contarSolicitacoes(local.nome);
 
         const colunaAcoes = document.createElement("td");
 
-        const acoes = document.createElement("div")
+        const acoes = document.createElement("div");
         acoes.className = "acoes";
 
         const botaoEditar = document.createElement("button");
@@ -52,8 +63,8 @@ function listarLocais() {
 
         acoes.append(botaoEditar, botaoExcluir);
         colunaAcoes.appendChild(acoes);
-        
-        linha.append(colunaNome, colunaBloco, colunaItens, colunaAcoes)
+
+        linha.append(colunaNome, colunaBloco, colunaItens, colunaAcoes);
         listaLocais.appendChild(linha);
     });
 }

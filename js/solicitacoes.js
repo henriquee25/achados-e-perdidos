@@ -228,3 +228,5 @@ function limparFormulario() {
 
 botaoCancelar.addEventListener("click", limparFormulario);
 
+carregarLocais();
+listarSolicitacoes();

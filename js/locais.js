@@ -111,9 +111,17 @@ formulario.addEventListener("submit", function (evento) {
 
     if (indiceEdicao === null) {
         //create: adiciona o local no final da lista
+       const local = {
+            nome: nome,
+            bloco: bloco
+        };
         locais.push(local);
     } else {
         //update: substitui o local que esta sendo editado
+        const local = {
+            nome: nome,
+            bloco: bloco
+        };
         locais[indiceEdicao] = local;
     }
 

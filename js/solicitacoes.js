@@ -29,19 +29,6 @@ function carregarLocais() {
     });
 }
 
-
-function buscarNomeLocal(id) {
-    const locaisSalvos = carregarLista("ap_locais");
-    const localEncontrado = locaisSalvos.find(function (local) {
-        return local.id === id;
-    });
-
-    if (localEncontrado) {
-        return localEncontrado.nome;
-    }
-    return "-";
-}
-
 // READ 
 function listarSolicitacoes() {
     listaSolicitacoes.innerHTML = "";
@@ -57,24 +44,26 @@ function listarSolicitacoes() {
         colunaCursoFase.textContent = solicitacao.curso + " (" + solicitacao.fase + "ª)";
 
         const colunaProcura = document.createElement("td");
-        if (solicitacao.cor !== "") {
-            colunaProcura.textContent = solicitacao.categoria + " - " + solicitacao.cor;
-        } else {
+        if (solicitacao.cor == "") {
             colunaProcura.textContent = solicitacao.categoria;
+        } else {
+            colunaProcura.textContent = solicitacao.categoria + " - " + solicitacao.cor;
         }
 
         const colunaLocal = document.createElement("td");
         colunaLocal.textContent = solicitacao.local;
 
         const colunaStatus = document.createElement("td");
-        colunaStatus.textContent = solicitacao.status;
+        const etiqueta = document.createElement("span");
+        etiqueta.className = "badge status-" + solicitacao.status.toLowerCase();
+        etiqueta.textContent = solicitacao.status;
+        colunaStatus.appendChild(etiqueta);
 
         const colunaAcoes = document.createElement("td");
         const acoes = document.createElement("div");
         acoes.className = "acoes";
 
         const botaoEditar = document.createElement("button");
-        botaoEditar.type = "button";
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn btn-sm btn-outline-primary me-1";
         botaoEditar.addEventListener("click", function () {
@@ -82,15 +71,16 @@ function listarSolicitacoes() {
         });
 
         const botaoExcluir = document.createElement("button");
-        botaoExcluir.type = "button";
         botaoExcluir.textContent = "Excluir";
         botaoExcluir.className = "btn btn-sm btn-outline-danger";
         botaoExcluir.addEventListener("click", function () {
             excluirSolicitacao(indice);
         });
 
-        if (solicitacao.status === "Aberta" && solicitacao.itemId === null) {
-            acoes.appendChild(botaoEditar);
+        if (solicitacao.status === "Aberta") {
+            if (solicitacao.itemId === null) {
+                acoes.appendChild(botaoEditar);
+            }
         }
         acoes.appendChild(botaoExcluir);
         colunaAcoes.appendChild(acoes);
@@ -112,7 +102,6 @@ formulario.addEventListener("submit", function (evento) {
     const cor = campoCor.value.trim();
     const local = campoLocal.value;
     const data = campoData.value;
-    const dataHoje = new Date().toLocaleDateString("sv-SE");
 
     if (nome.length < 3) {
         alert("Informe o nome com pelo menos 3 letras!");
@@ -121,7 +110,7 @@ formulario.addEventListener("submit", function (evento) {
     }
 
     if (contato.length < 8) {
-        alert("Informe um e-mail ou celular com DDD!");
+        alert("Informe um e-mail ou número de celular válido!");
         campoContato.focus();
         return;
     }
@@ -150,7 +139,7 @@ formulario.addEventListener("submit", function (evento) {
         return;
     }
 
-    if (data === "" || data > dataHoje) {
+    if (data === "" || new Date(data) > new Date()) {
         alert("Informe uma data válida (não pode ser no futuro)!");
         campoData.focus();
         return;
@@ -159,7 +148,6 @@ formulario.addEventListener("submit", function (evento) {
     if (indiceEdicao === null) {
         // CREATE
         const solicitacao = {
-            id: Date.now(),
             nome: nome,
             contato: contato,
             curso: curso,
@@ -172,10 +160,11 @@ formulario.addEventListener("submit", function (evento) {
             itemId: null
         };
         solicitacoes.push(solicitacao);
+        alert("Solicitação cadastrada com sucesso!");
     } else {
         // UPDATE
         const solicitacao = {
-            id: solicitacoes[indiceEdicao].id,
+
             nome: nome,
             contato: contato,
             curso: curso,
@@ -188,6 +177,7 @@ formulario.addEventListener("submit", function (evento) {
             itemId: solicitacoes[indiceEdicao].itemId
         };
         solicitacoes[indiceEdicao] = solicitacao;
+        alert("Solicitação atualizada com sucesso!");
     }
 
     salvarLista("ap_solicitacoes", solicitacoes);
@@ -216,18 +206,18 @@ function editarSolicitacao(indice) {
 
 // DELETAR
 function excluirSolicitacao(indice) {
-    if (solicitacoes[indice].itemId !== null) {
+    if (solicitacoes[indice].itemId === null) {
+        const confirmou = confirm("Deseja excluir esta solicitação?");
+
+        if (confirmou) {
+            solicitacoes.splice(indice, 1);
+            salvarLista("ap_solicitacoes", solicitacoes);
+            listarSolicitacoes();
+            limparFormulario();
+            alert("Solicitação excluída.");
+        }
+    } else {
         alert("Esta solicitação já está vinculada a um item e não pode ser excluída!");
-        return;
-    }
-
-    const confirmou = confirm("Deseja excluir esta solicitação?");
-
-    if (confirmou) {
-        solicitacoes.splice(indice, 1);
-        salvarLista("ap_solicitacoes", solicitacoes);
-        listarSolicitacoes();
-        limparFormulario();
     }
 }
 

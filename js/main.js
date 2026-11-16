@@ -1,7 +1,8 @@
 const botaoTema = document.querySelector("#btn-tema");
 
 function aplicarTema(tema) {
-    document.documentElement.setAttribute("data-bs-theme", tema);
+    //o data-bs-theme no body liga o modo escuro do Bootstrap
+    document.body.dataset.bsTheme = tema;
     localStorage.setItem("ap_tema", tema);
 
     if (tema === "dark") {
@@ -18,7 +19,7 @@ if (temaSalvo === null) {
 aplicarTema(temaSalvo);
 
 botaoTema.addEventListener("click", function () {
-    const temaAtual = document.documentElement.getAttribute("data-bs-theme");
+    const temaAtual = document.body.dataset.bsTheme;
 
     if (temaAtual === "dark") {
         aplicarTema("light");

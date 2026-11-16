@@ -61,7 +61,6 @@ function listarSolicitacoes() {
         acoes.className = "acoes";
 
         const botaoEditar = document.createElement("button");
-        botaoEditar.type = "button";
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn btn-sm btn-outline-primary me-1";
         botaoEditar.addEventListener("click", function () {
@@ -69,14 +68,13 @@ function listarSolicitacoes() {
         });
 
         const botaoExcluir = document.createElement("button");
-        botaoExcluir.type = "button";
         botaoExcluir.textContent = "Excluir";
         botaoExcluir.className = "btn btn-sm btn-outline-danger";
         botaoExcluir.addEventListener("click", function () {
             excluirSolicitacao(indice);
         });
 
-        if (solicitacao.status === "aberta" && (solicitacao.item === null || solicitacao.item === undefined)) {
+        if (solicitacao.status === "aberta") {
             acoes.appendChild(botaoEditar);
         }
         acoes.appendChild(botaoExcluir);
@@ -202,7 +200,7 @@ function editarSolicitacao(indice) {
 
 // DELETAR
 function excluirSolicitacao(indice) {
-    if (solicitacoes[indice].item === null || solicitacoes[indice].item === undefined) {
+    if (solicitacoes[indice].status === "aberta") {
         const confirmou = confirm("Deseja excluir esta solicitação?");
 
         if (confirmou) {

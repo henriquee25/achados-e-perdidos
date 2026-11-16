@@ -13,10 +13,7 @@ const botaoCancelar = document.querySelector("#btn-cancelar-solicitacao");
 const mensagemVazia = document.querySelector("#mensagem-vazia-solicitacoes");
 
 let solicitacoes = carregarLista("ap_solicitacoes");
-
-
 let indiceEdicao = null;
-
 
 function carregarLocais() {
     const locaisSalvos = carregarLista("ap_locais");
@@ -29,7 +26,7 @@ function carregarLocais() {
     });
 }
 
-// READ 
+// READ
 function listarSolicitacoes() {
     listaSolicitacoes.innerHTML = "";
     mensagemVazia.hidden = solicitacoes.length > 0;
@@ -44,7 +41,7 @@ function listarSolicitacoes() {
         colunaCursoFase.textContent = solicitacao.curso + " (" + solicitacao.fase + "ª)";
 
         const colunaProcura = document.createElement("td");
-        if (solicitacao.cor == "") {
+        if (solicitacao.cor === "") {
             colunaProcura.textContent = solicitacao.categoria;
         } else {
             colunaProcura.textContent = solicitacao.categoria + " - " + solicitacao.cor;
@@ -55,7 +52,7 @@ function listarSolicitacoes() {
 
         const colunaStatus = document.createElement("td");
         const etiqueta = document.createElement("span");
-        etiqueta.className = "badge status-" + solicitacao.status.toLowerCase();
+        etiqueta.className = "badge status-" + solicitacao.status;
         etiqueta.textContent = solicitacao.status;
         colunaStatus.appendChild(etiqueta);
 
@@ -64,6 +61,7 @@ function listarSolicitacoes() {
         acoes.className = "acoes";
 
         const botaoEditar = document.createElement("button");
+        botaoEditar.type = "button";
         botaoEditar.textContent = "Editar";
         botaoEditar.className = "btn btn-sm btn-outline-primary me-1";
         botaoEditar.addEventListener("click", function () {
@@ -71,16 +69,15 @@ function listarSolicitacoes() {
         });
 
         const botaoExcluir = document.createElement("button");
+        botaoExcluir.type = "button";
         botaoExcluir.textContent = "Excluir";
         botaoExcluir.className = "btn btn-sm btn-outline-danger";
         botaoExcluir.addEventListener("click", function () {
             excluirSolicitacao(indice);
         });
 
-        if (solicitacao.status === "Aberta") {
-            if (solicitacao.itemId === null) {
-                acoes.appendChild(botaoEditar);
-            }
+        if (solicitacao.status === "aberta" && (solicitacao.item === null || solicitacao.item === undefined)) {
+            acoes.appendChild(botaoEditar);
         }
         acoes.appendChild(botaoExcluir);
         colunaAcoes.appendChild(acoes);
@@ -139,8 +136,8 @@ formulario.addEventListener("submit", function (evento) {
         return;
     }
 
-    if (data === "" || new Date(data) > new Date()) {
-        alert("Informe uma data válida (não pode ser no futuro)!");
+    if (data === "") {
+        alert("Informe a data da perda!");
         campoData.focus();
         return;
     }
@@ -156,15 +153,14 @@ formulario.addEventListener("submit", function (evento) {
             cor: cor,
             local: local,
             data: data,
-            status: "Aberta",
-            itemId: null
+            status: "aberta",
+            item: null
         };
         solicitacoes.push(solicitacao);
         alert("Solicitação cadastrada com sucesso!");
     } else {
         // UPDATE
         const solicitacao = {
-
             nome: nome,
             contato: contato,
             curso: curso,
@@ -174,7 +170,7 @@ formulario.addEventListener("submit", function (evento) {
             local: local,
             data: data,
             status: solicitacoes[indiceEdicao].status,
-            itemId: solicitacoes[indiceEdicao].itemId
+            item: solicitacoes[indiceEdicao].item
         };
         solicitacoes[indiceEdicao] = solicitacao;
         alert("Solicitação atualizada com sucesso!");
@@ -206,7 +202,7 @@ function editarSolicitacao(indice) {
 
 // DELETAR
 function excluirSolicitacao(indice) {
-    if (solicitacoes[indice].itemId === null) {
+    if (solicitacoes[indice].item === null || solicitacoes[indice].item === undefined) {
         const confirmou = confirm("Deseja excluir esta solicitação?");
 
         if (confirmou) {
@@ -232,6 +228,3 @@ function limparFormulario() {
 
 botaoCancelar.addEventListener("click", limparFormulario);
 
-
-carregarLocais();
-listarSolicitacoes();

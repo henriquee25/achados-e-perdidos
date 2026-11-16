@@ -24,12 +24,13 @@ Os dados ficam salvos no `localStorage` do próprio navegador.
 
 ## Como usar
 
-1. Cadastre os **locais** (ex.: Biblioteca, Bloco A).
-2. Cadastre os **itens encontrados** em *Itens encontrados*.
-3. Registre as perdas em *Solicitações*.
-4. Em *Correspondências*, escolha uma solicitação para ver os itens compatíveis e vincular um deles.
-5. Em *Itens encontrados*, na aba *Reclamados*, confirme a devolução quando o dono retirar o item.
-6. Acompanhe os números no **Painel**.
+1. Acesse o link: [Achados e perdidos](https://henriquee25.github.io/achados-e-perdidos/)
+2. Cadastre os **locais** (ex.: Biblioteca, Bloco A).
+3. Cadastre os **itens encontrados** em *Itens encontrados*.
+4. Registre as perdas em *Solicitações*.
+5. Em *Correspondências*, escolha uma solicitação para ver os itens compatíveis e vincular um deles.
+6. Em *Itens encontrados*, na aba *Reclamados*, confirme a devolução quando o dono retirar o item.
+7. Acompanhe os números no **Painel**.
 
 ## Tecnologias
 

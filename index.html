@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Achados e Perdidos</a>
+                <a class="navbar-brand" href="index.html"><i class="bi bi-search"></i> Achados e Perdidos</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal"
                     aria-controls="menu-principal" aria-expanded="false" aria-label="Abrir menu">
@@ -38,8 +38,6 @@
     </header>
 
     <main class="container my-4">
-
-        <div id="alertas"></div>
 
         <h1 class="mb-4">Painel</h1>
 
@@ -116,18 +114,6 @@
             <p>Achados e Perdidos • Desenvolvimento Web I</p>
         </div>
     </footer>
-
-    <div id="modal-excluir" class="modal-excluir" hidden>
-        <div class="modal-excluir-fundo"></div>
-        <div class="modal-excluir-caixa">
-            <h2>Confirmar exclusão</h2>
-            <p id="modal-excluir-texto">Tem certeza que deseja excluir este registro?</p>
-            <div class="acoes d-flex flex-wrap gap-2">
-                <button id="btn-confirmar-exclusao" class="btn btn-danger">Excluir</button>
-                <button id="btn-cancelar-exclusao" class="btn btn-outline-secondary">Cancelar</button>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/storage.js"></script>

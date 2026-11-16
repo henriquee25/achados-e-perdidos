@@ -31,15 +31,9 @@ function atualizarResumo() {
         return;
     }
 
-    const total = devolvidos * 100;
-    const resto = total % itens.length;
-    let taxa = (total - resto) / itens.length;
-
-    if (resto * 2 >= itens.length) {
-        taxa++;
-    }
-
-    kpiTaxa.textContent = taxa + "%";
+    //toLocaleString sem casas decimais arredonda a taxa
+    const taxa = devolvidos * 100 / itens.length;
+    kpiTaxa.textContent = taxa.toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + "%";
 
     let topLocal = "—";
     let maiorQtdLocal = 0;
@@ -66,12 +60,7 @@ function listarUltimosItens() {
     tabelaUltimosItens.innerHTML = "";
 
     if (itens.length === 0) {
-        const linhaVazia = document.createElement("tr");
-        const colunaVazia = document.createElement("td");
-        colunaVazia.colSpan = 4;
-        colunaVazia.textContent = "Nenhum item cadastrado.";
-        linhaVazia.appendChild(colunaVazia);
-        tabelaUltimosItens.appendChild(linhaVazia);
+        tabelaUltimosItens.innerHTML = '<tr><td colspan="4">Nenhum item cadastrado.</td></tr>';
         return;
     }
 

@@ -79,12 +79,11 @@ h1 {
     overflow-wrap: anywhere;
 }
 
-.nav-tabs .nav-link.active {
+.nav-pills .nav-link.active {
     font-weight: bold;
 }
 
-#alerta-60-dias,
-#alerta-60dias {
+#alerta-60-dias {
     border-style: dashed;
     border-radius: 10px;
     padding: 12px 16px;
